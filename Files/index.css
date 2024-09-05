@@ -1,0 +1,306 @@
+:root {
+  --primary-bg-color: #f0f0f0; /* Lighter background color */
+  --text-color: #404040; /* Darker text color for better readability */
+  --button-border: 0.2em solid white;
+  --popup-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  --font-family: Poppins, sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+}
+
+#startbutton,
+#nextbutton,
+#backbutton,
+#placebutton {
+  background-color: var(--primary-bg-color);
+  border: var(--button-border);
+  color: var(--text-color);
+  position: fixed;
+  bottom: 15vh;
+  height: auto;
+}
+
+/* Center-align text for h2 within buttons */
+#startbutton h2,
+#nextbutton h2,
+#backbutton h2,
+#message h2,
+#placebutton h2 {
+  text-align: center;
+}
+
+#nextbutton,
+#backbutton,
+#startbutton,
+#placebutton {
+  width: 20vw;
+  bottom: 1.5vh;
+  border-radius: 20px;
+}
+
+#startbutton,
+#placebutton {
+  width: 50vw;
+  left: 25vw;
+}
+
+#nextbutton {
+  right: 5vw; /* Adjusted for consistency */
+}
+
+#backbutton {
+  left: 5vw;
+}
+
+#startbutton:active,
+#nextbutton:active,
+#backbutton:active,
+#placebutton:active {
+  background-color: white;
+  color: var(--primary-bg-color);
+}
+
+/* Hover state for buttons */
+#startbutton:hover,
+#nextbutton:hover,
+#backbutton:hover,
+#placebutton:hover {
+  background-color: #d0d0d0; /* Lighter shade for hover */
+  border: 0.2em solid #f0f0f0; /* Lighter border color for hover */
+  cursor: pointer;
+}
+
+/* Active (click) state for buttons */
+#startbutton:active,
+#nextbutton:active,
+#backbutton:active,
+#placebutton:active {
+  background-color: #c0c0c0; /* Even lighter shade for active click */
+  color: #202020; /* Darker text color for contrast */
+}
+
+#message {
+  position: fixed;
+  top: 50vh;
+  bottom: 1vh;
+  left: 3vw;
+  right: 3vw;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+  color: var(--text-color);
+  padding: 0.5vh 3vw;
+  z-index: 100;
+  box-shadow: var(--popup-shadow);
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+h1,
+h2 {
+  font-family: var(--font-family);
+  text-align: left; /* Unified alignment */
+}
+
+h1 {
+  font-size: 1em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+p {
+  margin-top: 0;
+}
+
+a {
+  font-weight: 600;
+  text-decoration: none;
+  color: inherit;
+}
+
+.popup {
+  position: fixed;
+  top: 58vh;
+  bottom: 1vh;
+  left: 3vw;
+  right: 3vw;
+  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+  color: var(--text-color);
+  padding: 4vh 3vw;
+  z-index: 100;
+  box-shadow: var(--popup-shadow);
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+}
+
+.popuptitle {
+  position: fixed;
+  top: 56vh;
+  bottom: 40vh;
+  left: 3vw;
+  right: 10vw;
+  padding: 4vh 3vw;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Ensures content and buttons are spaced out */
+  height: auto; /* Take full height of the popup */
+  max-height: 29vh;
+  margin-top: 4.5vh;
+  margin-bottom: 5vh;
+  overflow-y: auto;
+}
+
+.popup-content-wrapper::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+.popup-content,
+.title,
+.subtitle,
+.content {
+  font-family: var(--font-family);
+}
+
+.title {
+  font-size: 1.1em;
+  font-weight: 800;
+  line-height: 1em; /* Adjusts line height to be closer */
+  margin-top: 0; /* Removes the top margin */
+  margin-bottom: 0.4em; /* Adds a smaller bottom margin for spacing */
+}
+
+.subtitle {
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1em; /* Adjusts line height to be closer */
+  margin-top: 0; /* Removes the top margin */
+  margin-bottom: 0.5em; /* Adds a smaller bottom margin for spacing */
+}
+
+.content {
+  font-size: 0.8em;
+  text-indent: 0.8em;
+  text-align: justify;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Center the buttons horizontally */
+  margin-top: auto; /* Pushes the container to the bottom */
+  gap: 20px; /* Adds some space between buttons */
+}
+
+.popup-close-icon {
+  position: absolute;
+  top: 0;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #323232;
+}
+
+.popup-close-icon:hover {
+  color: #ff0000; /* Bright red color for hover state */
+  cursor: pointer;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  #nextbutton,
+  #backbutton {
+    width: 40vw; /* Increase width for smaller screens */
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 375px) {
+  .popup-content-wrapper {
+    margin-top: 6vh;
+  }
+}
+
+/* Responsive adjustments */
+@media (min-width: 740px) {
+  .popup-content-wrapper {
+    margin-top: 6vh;
+  }
+
+  #message {
+    top: 70vh;
+    bottom: 1vh;
+    left: 15vw;
+    right: 15vw;
+  }
+
+  h1 {
+    font-size: 1.4em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+  }
+
+  p {
+    margin-top: 0;
+  }
+
+  a {
+    font-weight: 600;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .popup {
+    top: 65vh;
+    left: 18vw;
+    right: 18vw;
+  }
+
+  .popuptitle {
+    top: 62.5vh;
+    left: 17.7vw;
+    right: 30vw;
+  }
+
+  .title {
+    font-size: 1.7em;
+  }
+
+  .subtitle {
+    font-size: 1.4em;
+  }
+
+  .content {
+    font-size: 1.3em;
+  }
+
+  .button-container {
+    gap: 5px; /* Adds some space between buttons */
+  }
+
+  .popup-close-icon {
+    font-size: 30px;
+  }
+
+  #nextbutton {
+    right: 20vw; /* Adjusted for consistency */
+  }
+
+  #backbutton {
+    left: 20vw;
+  }
+}

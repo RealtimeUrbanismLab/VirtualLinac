@@ -1,0 +1,266 @@
+<!-- Copyright (c) 2022 8th Wall, Inc. -->
+<!-- body.html is optional; elements will be added to your html body after app.js is loaded. -->
+
+<div id="message" class="message" style="display: none">
+    <h1>Welcome to the Accelerator!</h1>
+    <p>
+      In this application you will be able to interact with the component parts of a Linear
+      Accelerator, please use the buttons, or click on a model part to find out more information!
+    </p>
+  </div>
+  
+  <div id="startbutton" style="display: none; z-index: 200">
+    <h2>Start</h2>
+  </div>
+  
+  <div id="placebutton" style="display: none; z-index: 200">
+    <h2>Move a Linear Accelerlator with your fingers and press this button</h2>
+  </div>
+  
+  <div id="popup" class="popup" style="display: none">
+    <div id="popup-title" class="popuptitle"></div>
+    <div id="popup-content-wrapper" class="popup-content-wrapper">
+      <div id="popup-content" class="popup-content">
+        <div id="popup-image"></div>
+      </div>
+    </div>
+    <div class="popup-close-icon">
+      <span id="close-popup">&#10006;</span>
+    </div>
+    <div class="button-container">
+      <div id="backbutton" style="display: none; z-index: 200">
+        <h2>Back</h2>
+      </div>
+      <div id="nextbutton" style="display: none; z-index: 200">
+        <h2>Next</h2>
+      </div>
+    </div>
+  </div>
+  
+  <!-- coaching-overlay -->
+  <a-scene
+    coaching-overlay
+    next-button
+    selectcomponent
+    xrextras-gesture-detector
+    landing-page
+    xrextras-loading
+    xrextras-runtime-error
+    renderer="colorManagement: true"
+    xrweb="allowedDevices: any
+          defaultEnvironmentFogIntensity: 0.5; 
+          defaultEnvironmentFloorTexture: #groundTex; 
+          defaultEnvironmentFloorColor: #FFF;
+          defaultEnvironmentSkyBottomColor: #B4C4CC; 
+          defaultEnvironmentSkyTopColor: #5ac8fa;
+          defaultEnvironmentSkyGradientStrength: 0.5;
+          scale: absolute">
+    <!-- We can define assets here to be loaded when A-Frame initializes -->
+    <a-assets>
+      <a-asset-item id="01_Bed" src="assets/01_Bed.glb"></a-asset-item>
+      <a-asset-item id="01_Casing" src="assets/01_Casing.glb"></a-asset-item>
+      <a-asset-item id="01_Oil_Tank" src="assets/01_Oil_Tank.glb"></a-asset-item>
+      <a-asset-item id="02_Klystron_Inside" src="assets/02_Klystron_Inside.glb"></a-asset-item>
+      <a-asset-item id="02_Klystron_Outside" src="assets/02_Klystron_Outside.glb"></a-asset-item>
+      <a-asset-item id="03_Cooling_system" src="assets/03_Cooling_system.glb"></a-asset-item>
+      <a-asset-item id="04_Circulator" src="assets/04_Circulator.glb"></a-asset-item>
+      <a-asset-item id="05_Electro_Gun_Split" src="assets/05_Electro_Gun_Split.glb"></a-asset-item>
+      <a-asset-item id="05_Electro_Gun" src="assets/05_Electro_Gun.glb"></a-asset-item>
+      <a-asset-item id="06_Waveguide_Split" src="assets/06_Waveguide_Split.glb"></a-asset-item>
+      <a-asset-item id="06_Waveguide" src="assets/06_Waveguide.glb"></a-asset-item>
+      <a-asset-item id="07_Bending_Magnet" src="assets/07_Bending_Magnet.glb"></a-asset-item>
+      <a-asset-item id="08_Target" src="assets/08_Target.glb"></a-asset-item>
+      <a-asset-item id="09_Primary_Collimator" src="assets/09_Primary_Collimator.glb"></a-asset-item>
+      <a-asset-item
+        id="10_Secondary_Collimator"
+        src="assets/10_Secondary_Collimator.glb"></a-asset-item>
+      <a-asset-item id="11_Flatening_Filter" src="assets/11_Flatening_Filter.glb"></a-asset-item>
+      <a-asset-item id="12_X_Jaws" src="assets/12_X_Jaws.glb"></a-asset-item>
+      <a-asset-item id="13_Y_Jaws" src="assets/13_Y_Jaws.glb"></a-asset-item>
+      <a-asset-item id="14_MLC" src="assets/14_MLC.glb"></a-asset-item>
+      <a-asset-item id="15_KV_Imagine_System" src="assets/15_KV_Imagine_System.glb"></a-asset-item>
+    </a-assets>
+  
+    <!-- The raycaster will emit mouse events on scene objects specified with the cantap class -->
+    <a-camera
+      id="camera"
+      position="0 1.75 5"
+      raycaster="objects: .cantap"
+      cursor="fuse: false; rayOrigin: mouse;">
+    </a-camera>
+  
+    <a-entity
+      light="
+      intensity: 5;
+      type: directional;
+      castShadow: true;
+      shadowMapHeight: 2048;
+      shadowMapWidth: 2048;
+      shadowRadius: 1;
+      shadowBias: -0.0001;
+      target: #group"
+      xrextras-attach="target: group; offset: -8 15 4"
+      position="-20 20 20"
+      shadow>
+    </a-entity>
+  
+    <a-light xr-light="max: 5" type="ambient"> </a-light>
+  
+    <a-entity
+      id="group"
+      scale="1 1 1"
+      shadow="receive: true; cast: true"
+      renderer="colorManagement: true">
+    </a-entity>
+  
+    <a-entity
+      id="00_Casing"
+      scale="1 1 1"
+      gltf-model="#01_Casing"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="01_Bed"
+      scale="1 1 1"
+      gltf-model="#01_Bed"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="01_Oil_Tank"
+      scale="1 1 1"
+      gltf-model="#01_Oil_Tank"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="02_Klystron_Inside"
+      scale="1 1 1"
+      gltf-model="#02_Klystron_Inside"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="02_Klystron_Outside"
+      scale="1 1 1"
+      gltf-model="#02_Klystron_Outside"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="03_Cooling_system"
+      scale="1 1 1"
+      gltf-model="#03_Cooling_system"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="04_Circulator"
+      scale="1 1 1"
+      gltf-model="#04_Circulator"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="05_Electro_Gun_Split"
+      scale="1 1 1"
+      gltf-model="#05_Electro_Gun_Split"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="05_Electro_Gun"
+      scale="1 1 1"
+      gltf-model="#05_Electro_Gun"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="06_Waveguide_Split"
+      scale="1 1 1"
+      gltf-model="#06_Waveguide_Split"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="06_Waveguide"
+      scale="1 1 1"
+      gltf-model="#06_Waveguide"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="07_Bending_Magnet"
+      scale="1 1 1"
+      gltf-model="#07_Bending_Magnet"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="08_Target"
+      scale="1 1 1"
+      gltf-model="#08_Target"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="09_Primary_Collimator"
+      scale="1 1 1"
+      gltf-model="#09_Primary_Collimator"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="10_Secondary_Collimator"
+      scale="1 1 1"
+      gltf-model="#10_Secondary_Collimator"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="11_Flatening_Filter"
+      scale="1 1 1"
+      gltf-model="#11_Flatening_Filter"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="12_X_Jaws"
+      scale="1 1 1"
+      gltf-model="#12_X_Jaws"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="13_Y_Jaws"
+      scale="1 1 1"
+      gltf-model="#13_Y_Jaws"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="14_MLC"
+      scale="1 1 1"
+      gltf-model="#14_MLC"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-entity
+      id="15_KV_Imagine_System"
+      scale="1 1 1"
+      gltf-model="#15_KV_Imagine_System"
+      class="cantap"
+      shadow="receive: true; cast: true"></a-entity>
+  
+    <a-plane
+      id="ground"
+      rotation="-90 0 0"
+      width="1000"
+      height="1000"
+      material="shader: shadow"
+      shadow>
+    </a-plane>
+    
+  </a-scene>
+  
