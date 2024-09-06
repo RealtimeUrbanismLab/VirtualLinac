@@ -5,16 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Virtual Linac Model AR</title>
 
+    <!-- Load three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r138/three.min.js"></script>
+
     <!-- Load A-Frame -->
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
 
-    <!-- Load WebXR AR hit-test component -->
-    <script src="https://unpkg.com/aframe-xr-hands@1.1.0/dist/aframe-xr-hands.min.js"></script>
+    <!-- Load AR.js for AR functionality -->
+    <script src="https://aframe.io/releases/1.2.0/aframe-ar.min.js"></script>
 
-    <!-- Your CSS -->
+    <!-- Load your CSS -->
     <link rel="stylesheet" href="Files/index.css">
 
-    <!-- Move the component registration here, before the scene -->
+    <!-- Import map for module-based loading (optional) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+        }
+      }
+    </script>
+
+    <!-- Register surface placement component -->
     <script>
       AFRAME.registerComponent('surface-placement', {
         init: function () {
@@ -53,32 +66,125 @@
         },
       });
     </script>
+
+    <!-- Include Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Your JavaScript files -->
+    <script type="module" src="App/app.js"></script>
   </head>
   <body>
+    <!-- Include content from body.html -->
+
+    <div id="message" class="message" style="display: none">
+      <h1>Welcome to the Accelerator!</h1>
+      <p>
+        In this application you will be able to interact with the component parts of a Linear
+        Accelerator, please use the buttons, or click on a model part to find out more information!
+      </p>
+    </div>
+    
+    <div id="startbutton" style="display: none; z-index: 200">
+      <h2>Start</h2>
+    </div>
+    
+    <div id="placebutton" style="display: none; z-index: 200">
+      <h2>Move a Linear Accelerator with your fingers and press this button</h2>
+    </div>
+    
+    <div id="popup" class="popup" style="display: none">
+      <div id="popup-title" class="popuptitle"></div>
+      <div id="popup-content-wrapper" class="popup-content-wrapper">
+        <div id="popup-content" class="popup-content">
+          <div id="popup-image"></div>
+        </div>
+      </div>
+      <div class="popup-close-icon">
+        <span id="close-popup">&#10006;</span>
+      </div>
+      <div class="button-container">
+        <div id="backbutton" style="display: none; z-index: 200">
+          <h2>Back</h2>
+        </div>
+        <div id="nextbutton" style="display: none; z-index: 200">
+          <h2>Next</h2>
+        </div>
+      </div>
+    </div>
+    
+    <!-- AR-enabled scene -->
     <a-scene
       vr-mode-ui="enabled: false"
-      renderer="colorManagement: true"
       embedded
+      surface-placement
+      renderer="colorManagement: true"
       arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;">
       
-      <!-- Asset loading before usage -->
+      <!-- Asset loading -->
       <a-assets>
         <a-asset-item id="01_Bed" src="assets/01_Bed.glb"></a-asset-item>
+        <a-asset-item id="01_Casing" src="assets/01_Casing.glb"></a-asset-item>
+        <a-asset-item id="01_Oil_Tank" src="assets/01_Oil_Tank.glb"></a-asset-item>
+        <a-asset-item id="02_Klystron_Inside" src="assets/02_Klystron_Inside.glb"></a-asset-item>
+        <a-asset-item id="02_Klystron_Outside" src="assets/02_Klystron_Outside.glb"></a-asset-item>
+        <a-asset-item id="03_Cooling_system" src="assets/03_Cooling_system.glb"></a-asset-item>
+        <a-asset-item id="04_Circulator" src="assets/04_Circulator.glb"></a-asset-item>
+        <a-asset-item id="05_Electro_Gun_Split" src="assets/05_Electro_Gun_Split.glb"></a-asset-item>
+        <a-asset-item id="05_Electro_Gun" src="assets/05_Electro_Gun.glb"></a-asset-item>
+        <a-asset-item id="06_Waveguide_Split" src="assets/06_Waveguide_Split.glb"></a-asset-item>
+        <a-asset-item id="06_Waveguide" src="assets/06_Waveguide.glb"></a-asset-item>
+        <a-asset-item id="07_Bending_Magnet" src="assets/07_Bending_Magnet.glb"></a-asset-item>
+        <a-asset-item id="08_Target" src="assets/08_Target.glb"></a-asset-item>
+        <a-asset-item id="09_Primary_Collimator" src="assets/09_Primary_Collimator.glb"></a-asset-item>
+        <a-asset-item id="10_Secondary_Collimator" src="assets/10_Secondary_Collimator.glb"></a-asset-item>
+        <a-asset-item id="11_Flatening_Filter" src="assets/11_Flatening_Filter.glb"></a-asset-item>
+        <a-asset-item id="12_X_Jaws" src="assets/12_X_Jaws.glb"></a-asset-item>
+        <a-asset-item id="13_Y_Jaws" src="assets/13_Y_Jaws.glb"></a-asset-item>
+        <a-asset-item id="14_MLC" src="assets/14_MLC.glb"></a-asset-item>
+        <a-asset-item id="15_KV_Imagine_System" src="assets/15_KV_Imagine_System.glb"></a-asset-item>
       </a-assets>
+    
+      <!-- AR Camera for AR interactions -->
+      <a-camera
+        id="camera"
+        position="0 1.75 5"
+        raycaster="objects: .cantap"
+        cursor="fuse: false; rayOrigin: mouse;">
+      </a-camera>
 
-      <!-- AR camera setup -->
-      <a-camera gps-camera="simulateAltitude: 0; minDistance: 5; maxDistance: 500;" rotation-reader></a-camera>
-
-      <!-- Ground plane to detect surfaces -->
-      <a-plane rotation="-90 0 0" width="200" height="200" color="#7BC8A4"></a-plane>
-
-      <!-- Placeholder for 3D model -->
+      <!-- Placeholder for AR model -->
       <a-entity id="model-placeholder" gltf-model="#01_Bed" scale="0.5 0.5 0.5" visible="false"></a-entity>
+
+      <!-- 3D objects (linear accelerator components) -->
+      <a-entity id="group" scale="1 1 1" shadow="receive: true; cast: true">
+        <a-entity id="00_Casing" scale="1 1 1" gltf-model="#01_Casing" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="01_Bed" scale="1 1 1" gltf-model="#01_Bed" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="01_Oil_Tank" scale="1 1 1" gltf-model="#01_Oil_Tank" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="02_Klystron_Inside" scale="1 1 1" gltf-model="#02_Klystron_Inside" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="02_Klystron_Outside" scale="1 1 1" gltf-model="#02_Klystron_Outside" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="03_Cooling_system" scale="1 1 1" gltf-model="#03_Cooling_system" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="04_Circulator" scale="1 1 1" gltf-model="#04_Circulator" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="05_Electro_Gun_Split" scale="1 1 1" gltf-model="#05_Electro_Gun_Split" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="05_Electro_Gun" scale="1 1 1" gltf-model="#05_Electro_Gun" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="06_Waveguide_Split" scale="1 1 1" gltf-model="#06_Waveguide_Split" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="06_Waveguide" scale="1 1 1" gltf-model="#06_Waveguide" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="07_Bending_Magnet" scale="1 1 1" gltf-model="#07_Bending_Magnet" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="08_Target" scale="1 1 1" gltf-model="#08_Target" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="09_Primary_Collimator" scale="1 1 1" gltf-model="#09_Primary_Collimator" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="10_Secondary_Collimator" scale="1 1 1" gltf-model="#10_Secondary_Collimator" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="11_Flatening_Filter" scale="1 1 1" gltf-model="#11_Flatening_Filter" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="12_X_Jaws" scale="1 1 1" gltf-model="#12_X_Jaws" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="13_Y_Jaws" scale="1 1 1" gltf-model="#13_Y_Jaws" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="14_MLC" scale="1 1 1" gltf-model="#14_MLC" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="15_KV_Imagine_System" scale="1 1 1" gltf-model="#15_KV_Imagine_System" class="cantap" shadow="receive: true; cast: true"></a-entity>
+      </a-entity>
+      
+      <!-- Ground plane for shadowing -->
+      <a-plane id="ground" rotation="-90 0 0" width="1000" height="1000" material="shader: shadow" shadow></a-plane>
     </a-scene>
 
-    <!-- Hit-test and surface placement logic -->
-    <script>
-      document.querySelector('a-scene').setAttribute('surface-placement', '');
-    </script>
+    <!-- Include content from body.html -->
   </body>
 </html>
