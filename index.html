@@ -74,45 +74,63 @@
     <a-scene
       embedded
       arjs="sourceType: webcam; debugUIEnabled: false;"
-      renderer="antialias: true; colorManagement: true; logarithmicDepthBuffer: true;"
-      gesture-detector>
+      renderer="antialias: true; colorManagement: true; logarithmicDepthBuffer: true;">
       
+      <!-- Asset loading for models -->
+      <a-assets>
+        <a-asset-item id="01_Bed" src="assets/01_Bed.glb"></a-asset-item>
+        <a-asset-item id="01_Casing" src="assets/01_Casing.glb"></a-asset-item>
+        <a-asset-item id="01_Oil_Tank" src="assets/01_Oil_Tank.glb"></a-asset-item>
+        <a-asset-item id="02_Klystron_Inside" src="assets/02_Klystron_Inside.glb"></a-asset-item>
+        <a-asset-item id="02_Klystron_Outside" src="assets/02_Klystron_Outside.glb"></a-asset-item>
+        <a-asset-item id="03_Cooling_system" src="assets/03_Cooling_system.glb"></a-asset-item>
+        <a-asset-item id="04_Circulator" src="assets/04_Circulator.glb"></a-asset-item>
+        <a-asset-item id="05_Electro_Gun_Split" src="assets/05_Electro_Gun_Split.glb"></a-asset-item>
+        <a-asset-item id="05_Electro_Gun" src="assets/05_Electro_Gun.glb"></a-asset-item>
+        <a-asset-item id="06_Waveguide_Split" src="assets/06_Waveguide_Split.glb"></a-asset-item>
+        <a-asset-item id="06_Waveguide" src="assets/06_Waveguide.glb"></a-asset-item>
+        <a-asset-item id="07_Bending_Magnet" src="assets/07_Bending_Magnet.glb"></a-asset-item>
+        <a-asset-item id="08_Target" src="assets/08_Target.glb"></a-asset-item>
+        <a-asset-item id="09_Primary_Collimator" src="assets/09_Primary_Collimator.glb"></a-asset-item>
+        <a-asset-item id="10_Secondary_Collimator" src="assets/10_Secondary_Collimator.glb"></a-asset-item>
+        <a-asset-item id="11_Flatening_Filter" src="assets/11_Flatening_Filter.glb"></a-asset-item>
+        <a-asset-item id="12_X_Jaws" src="assets/12_X_Jaws.glb"></a-asset-item>
+        <a-asset-item id="13_Y_Jaws" src="assets/13_Y_Jaws.glb"></a-asset-item>
+        <a-asset-item id="14_MLC" src="assets/14_MLC.glb"></a-asset-item>
+        <a-asset-item id="15_KV_Imagine_System" src="assets/15_KV_Imagine_System.glb"></a-asset-item>
+      </a-assets>
+
       <!-- Ground detection -->
-      <a-entity surface-placement="minDistance: 0.3; maxDistance: 3; showDebugPlane: false;">
+      <a-entity position="0 0 0">
         
         <!-- 3D models with scale adjustment for AR -->
         <a-entity
           id="model-group"
-          scale="0.02 0.02 0.02"  <!-- Reduced scale -->
+          scale="0.02 0.02 0.02"  <!-- Adjust the scale as per need -->
           position="0 0 0"
-          shadow="receive: true; cast: true"
-          gesture-detector
-          xrextras-hold-drag
-          xrextras-two-finger-rotate>
+          shadow="receive: true; cast: true">
           
           <a-entity
             id="01_Bed"
-            scale="1 1 1"
             gltf-model="#01_Bed"
             class="cantap"
-            shadow="receive: true; cast: true"
-          ></a-entity>
+            shadow="receive: true; cast: true">
+          </a-entity>
 
           <a-entity
             id="01_Casing"
-            scale="1 1 1"
             gltf-model="#01_Casing"
             class="cantap"
-            shadow="receive: true; cast: true"
-          ></a-entity>
+            shadow="receive: true; cast: true">
+          </a-entity>
 
-          <!-- Add more entities for each model -->
+          <!-- Add more entities for each model as needed -->
         </a-entity>
 
       </a-entity>
 
       <!-- AR Camera -->
-      <a-entity camera="active: true" look-controls="enabled: true" arjs></a-entity>
+      <a-entity camera look-controls="enabled: true"></a-entity>
       
     </a-scene>
 
