@@ -3,8 +3,8 @@
 // app.js is the main entry point for your 8th Wall web app. Code here will execute after head.html
 // is loaded, and before body.html is loaded.
 
-import './index.css'
-import {nextButtonComponent} from './next-button'
+// import '../Files/index.css'
+import {nextButtonComponent} from '../Files/next-button.js'
 
 AFRAME.registerComponent('next-button', nextButtonComponent())
 
