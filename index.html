@@ -13,27 +13,8 @@
 
     <!-- Your CSS -->
     <link rel="stylesheet" href="Files/index.css">
-  </head>
-  <body>
-    <a-scene
-      vr-mode-ui="enabled: false"
-      renderer="colorManagement: true"
-      embedded
-      arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;">
-      
-      <!-- AR camera setup -->
-      <a-camera
-        gps-camera="simulateAltitude: 0; minDistance: 5; maxDistance: 500;"
-        rotation-reader></a-camera>
 
-      <!-- Ground plane to detect surfaces -->
-      <a-plane rotation="-90 0 0" width="200" height="200" color="#7BC8A4"></a-plane>
-
-      <!-- Placeholder for 3D model -->
-      <a-entity id="model-placeholder" gltf-model="#01_Bed" scale="0.5 0.5 0.5" visible="false"></a-entity>
-    </a-scene>
-
-    <!-- Hit-test and surface placement logic -->
+    <!-- Move the component registration here, before the scene -->
     <script>
       AFRAME.registerComponent('surface-placement', {
         init: function () {
@@ -41,7 +22,6 @@
           let hitTestSource = null;
           let hitTestSourceRequested = false;
 
-          // Enable WebXR session
           this.el.sceneEl.addEventListener('enter-vr', () => {
             const xrSession = this.el.sceneEl.renderer.xr.getSession();
 
@@ -53,7 +33,6 @@
 
             hitTestSourceRequested = true;
 
-            // Handle "select" event to place model
             xrSession.addEventListener('select', (event) => {
               const model = document.querySelector('#model-placeholder');
               const frame = event.frame;
@@ -73,7 +52,32 @@
           });
         },
       });
+    </script>
+  </head>
+  <body>
+    <a-scene
+      vr-mode-ui="enabled: false"
+      renderer="colorManagement: true"
+      embedded
+      arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;">
+      
+      <!-- Asset loading before usage -->
+      <a-assets>
+        <a-asset-item id="01_Bed" src="assets/01_Bed.glb"></a-asset-item>
+      </a-assets>
 
+      <!-- AR camera setup -->
+      <a-camera gps-camera="simulateAltitude: 0; minDistance: 5; maxDistance: 500;" rotation-reader></a-camera>
+
+      <!-- Ground plane to detect surfaces -->
+      <a-plane rotation="-90 0 0" width="200" height="200" color="#7BC8A4"></a-plane>
+
+      <!-- Placeholder for 3D model -->
+      <a-entity id="model-placeholder" gltf-model="#01_Bed" scale="0.5 0.5 0.5" visible="false"></a-entity>
+    </a-scene>
+
+    <!-- Hit-test and surface placement logic -->
+    <script>
       document.querySelector('a-scene').setAttribute('surface-placement', '');
     </script>
   </body>
