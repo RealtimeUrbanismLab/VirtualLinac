@@ -23,21 +23,12 @@
     <script type="module" src="App/app.js"></script>
   </head>
   <body>
-    <!-- Information Message -->
     <div id="message" class="message" style="display: none">
         <h1>Welcome to the Accelerator!</h1>
         <p>
           In this application you will be able to interact with the component parts of a Linear
           Accelerator, please use the buttons, or click on a model part to find out more information!
         </p>
-    </div>
-
-    <div id="startbutton" style="display: none; z-index: 200">
-        <h2>Start</h2>
-    </div>
-
-    <div id="placebutton" style="display: none; z-index: 200">
-        <h2>Move a Linear Accelerator with your fingers and press this button</h2>
     </div>
 
     <div id="popup" class="popup" style="display: none">
@@ -50,77 +41,22 @@
         <div class="popup-close-icon">
           <span id="close-popup">&#10006;</span>
         </div>
-        <div class="button-container">
-          <div id="backbutton" style="display: none; z-index: 200">
-              <h2>Back</h2>
-          </div>
-          <div id="nextbutton" style="display: none; z-index: 200">
-              <h2>Next</h2>
-          </div>
-        </div>
     </div>
 
     <!-- AR-enabled scene with surface placement -->
-    <a-scene
-      embedded
-      arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;"
-      renderer="antialias: true; colorManagement: true; logarithmicDepthBuffer: true;"
-      vr-mode-ui="enabled: false"
-      gesture-detector
-      xrextras-hold-drag
-      xrextras-two-finger-rotate>
+    <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false; detectionMode: mono_and_matrix; matrixCodeType: 3x3;" renderer="antialias: true; colorManagement: true; logarithmicDepthBuffer: true;" vr-mode-ui="enabled: false">
       
       <!-- Asset loading for models -->
       <a-assets>
         <a-asset-item id="01_Bed" src="assets/01_Bed.glb"></a-asset-item>
         <a-asset-item id="01_Casing" src="assets/01_Casing.glb"></a-asset-item>
-        <a-asset-item id="01_Oil_Tank" src="assets/01_Oil_Tank.glb"></a-asset-item>
-        <a-asset-item id="02_Klystron_Inside" src="assets/02_Klystron_Inside.glb"></a-asset-item>
-        <a-asset-item id="02_Klystron_Outside" src="assets/02_Klystron_Outside.glb"></a-asset-item>
-        <a-asset-item id="03_Cooling_system" src="assets/03_Cooling_system.glb"></a-asset-item>
-        <a-asset-item id="04_Circulator" src="assets/04_Circulator.glb"></a-asset-item>
-        <a-asset-item id="05_Electro_Gun_Split" src="assets/05_Electro_Gun_Split.glb"></a-asset-item>
-        <a-asset-item id="05_Electro_Gun" src="assets/05_Electro_Gun.glb"></a-asset-item>
-        <a-asset-item id="06_Waveguide_Split" src="assets/06_Waveguide_Split.glb"></a-asset-item>
-        <a-asset-item id="06_Waveguide" src="assets/06_Waveguide.glb"></a-asset-item>
-        <a-asset-item id="07_Bending_Magnet" src="assets/07_Bending_Magnet.glb"></a-asset-item>
-        <a-asset-item id="08_Target" src="assets/08_Target.glb"></a-asset-item>
-        <a-asset-item id="09_Primary_Collimator" src="assets/09_Primary_Collimator.glb"></a-asset-item>
-        <a-asset-item id="10_Secondary_Collimator" src="assets/10_Secondary_Collimator.glb"></a-asset-item>
-        <a-asset-item id="11_Flatening_Filter" src="assets/11_Flatening_Filter.glb"></a-asset-item>
-        <a-asset-item id="12_X_Jaws" src="assets/12_X_Jaws.glb"></a-asset-item>
-        <a-asset-item id="13_Y_Jaws" src="assets/13_Y_Jaws.glb"></a-asset-item>
-        <a-asset-item id="14_MLC" src="assets/14_MLC.glb"></a-asset-item>
-        <a-asset-item id="15_KV_Imagine_System" src="assets/15_KV_Imagine_System.glb"></a-asset-item>
+        <!-- More assets... -->
       </a-assets>
 
       <!-- Ground detection and surface placement -->
-      <a-entity id="model-group" position="0.002 -.002 .002" scale="0.001 0.001 0.001">
-        <a-plane
-          id="groundPlane"
-          position="0 0 0"
-          rotation="-90 0 0"
-          width="1000"
-          height="1000"
-          color="#ffffff"
-          shadow></a-plane>
-
-        <a-entity
-          id="01_Bed"
-          gltf-model="#01_Bed"
-          class="cantap"
-          shadow="receive: true; cast: true">
-        </a-entity>
-
-        <a-entity
-          id="01_Casing"
-          gltf-model="#01_Casing"
-          class="cantap"
-          shadow="receive: true; cast: true">
-        </a-entity>
-
-        <!-- Add more entities for each model as needed -->
-
+      <a-entity id="model-group" position="-0.06 -0.04 -0.06" scale="0.0254 0.0254 0.0254" gesture-detector xrextras-hold-drag xrextras-two-finger-rotate>
+        <a-entity id="01_Bed" gltf-model="#01_Bed" class="cantap" shadow="receive: true; cast: true"></a-entity>
+        <a-entity id="01_Casing" gltf-model="#01_Casing" class="cantap" shadow="receive: true; cast: true"></a-entity>
       </a-entity>
 
       <!-- AR Camera -->
@@ -128,5 +64,6 @@
       
     </a-scene>
 
+ 
   </body>
 </html>
