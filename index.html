@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual Linac Model AR</title>
-
+    <title>Virtual Linac Model</title>
+    
     <!-- Load A-Frame -->
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
 
@@ -14,17 +14,62 @@
     <!-- Load your CSS -->
     <link rel="stylesheet" href="Files/index.css">
 
+    <!-- Import map for module-based loading (optional) -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.161.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.161.0/examples/jsm/"
+        }
+      }
+    </script>
+
+    <!-- Include Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
     <!-- Your JavaScript files -->
     <script type="module" src="App/app.js"></script>
   </head>
   <body>
+    <!-- Information Message -->
     <div id="message" class="message" style="display: none">
-      <h1>Welcome to the Accelerator!</h1>
-      <p>
-        In this application you will be able to interact with the component parts of a Linear Accelerator.
-      </p>
+        <h1>Welcome to the Accelerator!</h1>
+        <p>
+        In this application you will be able to interact with the component parts of a Linear
+        Accelerator, please use the buttons, or click on a model part to find out more information!
+        </p>
     </div>
-    
+
+    <div id="startbutton" style="display: none; z-index: 200">
+        <h2>Start</h2>
+    </div>
+
+    <div id="placebutton" style="display: none; z-index: 200">
+        <h2>Move a Linear Accelerator with your fingers and press this button</h2>
+    </div>
+
+    <div id="popup" class="popup" style="display: none">
+        <div id="popup-title" class="popuptitle"></div>
+        <div id="popup-content-wrapper" class="popup-content-wrapper">
+        <div id="popup-content" class="popup-content">
+            <div id="popup-image"></div>
+        </div>
+        </div>
+        <div class="popup-close-icon">
+        <span id="close-popup">&#10006;</span>
+        </div>
+        <div class="button-container">
+        <div id="backbutton" style="display: none; z-index: 200">
+            <h2>Back</h2>
+        </div>
+        <div id="nextbutton" style="display: none; z-index: 200">
+            <h2>Next</h2>
+        </div>
+        </div>
+    </div>
+
     <!-- AR-enabled scene with surface placement -->
     <a-scene
       embedded
@@ -35,25 +80,69 @@
       <!-- Asset loading -->
       <a-assets>
         <a-asset-item id="01_Bed" src="assets/01_Bed.glb"></a-asset-item>
-        <!-- Load other assets similarly -->
+        <a-asset-item id="01_Casing" src="assets/01_Casing.glb"></a-asset-item>
+        <a-asset-item id="01_Oil_Tank" src="assets/01_Oil_Tank.glb"></a-asset-item>
+        <a-asset-item id="02_Klystron_Inside" src="assets/02_Klystron_Inside.glb"></a-asset-item>
+        <a-asset-item id="02_Klystron_Outside" src="assets/02_Klystron_Outside.glb"></a-asset-item>
+        <a-asset-item id="03_Cooling_system" src="assets/03_Cooling_system.glb"></a-asset-item>
+        <a-asset-item id="04_Circulator" src="assets/04_Circulator.glb"></a-asset-item>
+        <a-asset-item id="05_Electro_Gun_Split" src="assets/05_Electro_Gun_Split.glb"></a-asset-item>
+        <a-asset-item id="05_Electro_Gun" src="assets/05_Electro_Gun.glb"></a-asset-item>
+        <a-asset-item id="06_Waveguide_Split" src="assets/06_Waveguide_Split.glb"></a-asset-item>
+        <a-asset-item id="06_Waveguide" src="assets/06_Waveguide.glb"></a-asset-item>
+        <a-asset-item id="07_Bending_Magnet" src="assets/07_Bending_Magnet.glb"></a-asset-item>
+        <a-asset-item id="08_Target" src="assets/08_Target.glb"></a-asset-item>
+        <a-asset-item id="09_Primary_Collimator" src="assets/09_Primary_Collimator.glb"></a-asset-item>
+        <a-asset-item id="10_Secondary_Collimator" src="assets/10_Secondary_Collimator.glb"></a-asset-item>
+        <a-asset-item id="11_Flatening_Filter" src="assets/11_Flatening_Filter.glb"></a-asset-item>
+        <a-asset-item id="12_X_Jaws" src="assets/12_X_Jaws.glb"></a-asset-item>
+        <a-asset-item id="13_Y_Jaws" src="assets/13_Y_Jaws.glb"></a-asset-item>
+        <a-asset-item id="14_MLC" src="assets/14_MLC.glb"></a-asset-item>
+        <a-asset-item id="15_KV_Imagine_System" src="assets/15_KV_Imagine_System.glb"></a-asset-item>
       </a-assets>
 
       <!-- AR Camera -->
-      <a-entity camera="active: true" position="0 0 0" look-controls="enabled: true" arjs></a-entity>
+      <a-entity camera="active: true" look-controls="enabled: true" arjs></a-entity>
 
-      <!-- 3D object with surface placement -->
+      <!-- 3D objects with surface placement and interaction -->
       <a-entity
-        id="model"
-        position="0 0 0"
+        id="model-group"
         scale="0.1 0.1 0.1"
+        position="0 0 0"
         surface-placement="minDistance: 0.5; maxDistance: 3; showDebugPlane: true;"
         shadow="receive: true; cast: true"
-        gltf-model="#01_Casing"
         gesture-detector
-        xrextras-hold-drag  <!-- Allow movement -->
+        xrextras-hold-drag  <!-- Allow dragging -->
         xrextras-two-finger-rotate  <!-- Allow rotation -->
-      ></a-entity>
+      >
+        <a-entity
+          id="01_Bed"
+          scale="1 1 1"
+          gltf-model="#01_Bed"
+          class="cantap"
+          shadow="receive: true; cast: true"
+        ></a-entity>
 
+        <a-entity
+          id="01_Casing"
+          scale="1 1 1"
+          gltf-model="#01_Casing"
+          class="cantap"
+          shadow="receive: true; cast: true"
+        ></a-entity>
+
+        <!-- Add more entities for each model -->
+      </a-entity>
+
+      <!-- Ground plane for AR surface detection -->
+      <a-plane
+        id="ground"
+        rotation="-90 0 0"
+        width="1000"
+        height="1000"
+        material="shader: shadow"
+        shadow
+      ></a-plane>
     </a-scene>
 
   </body>
