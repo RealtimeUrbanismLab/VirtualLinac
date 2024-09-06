@@ -27,46 +27,6 @@
       }
     </script>
 
-    <!-- Register surface placement component -->
-    <script>
-      AFRAME.registerComponent('surface-placement', {
-        init: function () {
-          const sceneEl = this.el;
-          let hitTestSource = null;
-          let hitTestSourceRequested = false;
-
-          this.el.sceneEl.addEventListener('enter-vr', () => {
-            const xrSession = this.el.sceneEl.renderer.xr.getSession();
-
-            xrSession.requestReferenceSpace('viewer').then((referenceSpace) => {
-              xrSession.requestHitTestSource({ space: referenceSpace }).then((source) => {
-                hitTestSource = source;
-              });
-            });
-
-            hitTestSourceRequested = true;
-
-            xrSession.addEventListener('select', (event) => {
-              const model = document.querySelector('#model-placeholder');
-              const frame = event.frame;
-
-              if (hitTestSource) {
-                const viewerPose = frame.getViewerPose(xrSession.renderState.baseLayer);
-                const hitTestResults = frame.getHitTestResults(hitTestSource);
-
-                if (hitTestResults.length > 0) {
-                  const hit = hitTestResults[0];
-                  const position = hit.getPose(referenceSpace).transform.position;
-                  model.setAttribute('position', `${position.x} ${position.y} ${position.z}`);
-                  model.setAttribute('visible', 'true');
-                }
-              }
-            });
-          });
-        },
-      });
-    </script>
-
     <!-- Include Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -118,9 +78,13 @@
     <a-scene
       vr-mode-ui="enabled: false"
       embedded
-      surface-placement
+      arjs="sourceType: webcam; debugUIEnabled: false;"
       renderer="colorManagement: true"
-      arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;">
+      gesture-detector
+      xrextras-gesture-detector
+      landing-page
+      xrextras-loading
+      xrextras-runtime-error>
       
       <!-- Asset loading -->
       <a-assets>
@@ -147,15 +111,7 @@
       </a-assets>
     
       <!-- AR Camera for AR interactions -->
-      <a-camera
-        id="camera"
-        position="0 1.75 5"
-        raycaster="objects: .cantap"
-        cursor="fuse: false; rayOrigin: mouse;">
-      </a-camera>
-
-      <!-- Placeholder for AR model -->
-      <a-entity id="model-placeholder" gltf-model="#01_Bed" scale="0.5 0.5 0.5" visible="false"></a-entity>
+      <a-entity camera position="0 1.6 0" look-controls="enabled: false" wasd-controls="enabled: false" arjs></a-entity>
 
       <!-- 3D objects (linear accelerator components) -->
       <a-entity id="group" scale="1 1 1" shadow="receive: true; cast: true">
