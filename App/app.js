@@ -1,16 +1,42 @@
-// Copyright (c) 2022 8th Wall, Inc.
-//
-// app.js is the main entry point for your 8th Wall web app. Code here will execute after head.html
-// is loaded, and before body.html is loaded.
+import {nextButtonComponent} from '../Files/next-button.js';
+import {selectcomponent} from '../Files/selectcomponent.js';
 
-// import '../Files/index.css'
-import {nextButtonComponent} from '../Files/next-button.js'
+// Register custom A-Frame component
+AFRAME.registerComponent('model-loaded-check', {
+    init: function () {
+        const el = this.el;
 
-AFRAME.registerComponent('next-button', nextButtonComponent())
+        // Listen for the model-loaded event
+        el.addEventListener('model-loaded', () => {
+            console.log(`Model ${el.id} loaded`);
+            checkAllModelsLoaded();
+        });
+    }
+});
 
-const IS_IOS =
-  /^(iPad|iPhone|iPod)/.test(window.navigator.platform) ||
-  (/^Mac/.test(window.navigator.platform) && window.navigator.maxTouchPoints > 1)
-if (IS_IOS) {
-  window.createImageBitmap = undefined
+// Track the loading of all models
+let modelsLoaded = 0;
+const totalModels = document.querySelectorAll('.cantap').length;
+
+function checkAllModelsLoaded() {
+    modelsLoaded++;
+    if (modelsLoaded === totalModels) {
+        console.log("All models loaded, initializing interactions...");
+        selectcomponent(); // Initialize interactions
+    }
 }
+
+// Popup and Welcome Message Handling
+document.addEventListener('DOMContentLoaded', function () {
+    const startButton = document.getElementById('startbutton');
+    const message = document.getElementById('message');
+
+    // Show welcome message on load
+    message.style.display = 'block';
+
+    startButton.onclick = () => {
+        message.style.display = 'none';
+    };
+});
+
+AFRAME.registerComponent('next-button', nextButtonComponent());

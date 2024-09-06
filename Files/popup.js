@@ -1,3 +1,4 @@
+//popup.js 
 import {resetModelOpacity, updateModelVisibility} from './selectcomponent.js'
 
 function openPopup(modelIndex, modelDescriptions) {

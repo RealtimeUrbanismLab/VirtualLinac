@@ -1,3 +1,5 @@
+//selectcomponent.js
+
 import {modelDescriptions} from './data.js'
 import {openPopup} from './popup.js'
 import {updateButtonVisibility} from './next-button.js'
@@ -61,22 +63,36 @@ export function resetModelOpacity() {
   })
 }
 
-export function selectcomponent() {
-  const modelElements = document.querySelectorAll('.cantap')
-  modelElements.forEach((modelElement) => {
-    if (modelElement.id !== 'group') {
-      modelElement.addEventListener('click', () => {
-        const modelId = modelElement.id
-        const newIndex = modelDescriptions.findIndex(description => description.Modelname === modelId)
-        setSelectedIndex(newIndex)
-        console.log('setSelectIndex1: ', setSelectedIndex(newIndex))
+// export function selectcomponent() {
+//   const modelElements = document.querySelectorAll('.cantap')
+//   modelElements.forEach((modelElement) => {
+//     if (modelElement.id !== 'group') {
+//       modelElement.addEventListener('click', () => {
+//         const modelId = modelElement.id
+//         const newIndex = modelDescriptions.findIndex(description => description.Modelname === modelId)
+//         setSelectedIndex(newIndex)
+//         console.log('setSelectIndex1: ', setSelectedIndex(newIndex))
 
-        if (newIndex !== -1) {
-          openPopup(newIndex, modelDescriptions)
-          updateModelVisibility(modelId)
-          updateButtonVisibility()
-        }
-      })
-    }
-  })
+//         if (newIndex !== -1) {
+//           openPopup(newIndex, modelDescriptions)
+//           updateModelVisibility(modelId)
+//           updateButtonVisibility()
+//         }
+//       })
+//     }
+//   })
+// }
+
+export function selectcomponent() {
+  const modelElements = document.querySelectorAll('.cantap');
+  modelElements.forEach((modelElement) => {
+      modelElement.addEventListener('click', () => {
+          const modelId = modelElement.id;
+          const newIndex = modelDescriptions.findIndex(description => description.Modelname === modelId);
+          if (newIndex !== -1) {
+              openPopup(newIndex, modelDescriptions);
+          }
+      });
+  });
 }
+

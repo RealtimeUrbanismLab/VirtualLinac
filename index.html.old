@@ -114,7 +114,9 @@
         <a-asset-item id="07_Bending_Magnet" src="assets/07_Bending_Magnet.glb"></a-asset-item>
         <a-asset-item id="08_Target" src="assets/08_Target.glb"></a-asset-item>
         <a-asset-item id="09_Primary_Collimator" src="assets/09_Primary_Collimator.glb"></a-asset-item>
-        <a-asset-item id="10_Secondary_Collimator" src="assets/10_Secondary_Collimator.glb"></a-asset-item>
+        <a-asset-item
+            id="10_Secondary_Collimator"
+            src="assets/10_Secondary_Collimator.glb"></a-asset-item>
         <a-asset-item id="11_Flatening_Filter" src="assets/11_Flatening_Filter.glb"></a-asset-item>
         <a-asset-item id="12_X_Jaws" src="assets/12_X_Jaws.glb"></a-asset-item>
         <a-asset-item id="13_Y_Jaws" src="assets/13_Y_Jaws.glb"></a-asset-item>

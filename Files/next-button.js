@@ -1,3 +1,4 @@
+//next-button.js
 import {modelDescriptions} from './data.js'
 import {openPopup} from './popup.js'
 import {selectcomponent, updateModelVisibility} from './selectcomponent.js'
