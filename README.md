@@ -4,9 +4,9 @@
 
 Parminder S. Basran(1), SungHo Synn(2), Gregory A.Marzano(1), Hyun Maenga(1), Farzin Lotfi-Jam(2)
 
-(1) Department of Clinical Sciences, College of Veterinary Medicine, Cornell University, Ithaca, NY 14853, USA [Vaider Lab](https://vaiderlab.org/)
+(1) [Vaider Lab](https://vaiderlab.org/): Department of Clinical Sciences, College of Veterinary Medicine, Cornell University, Ithaca, NY 14853, USA 
 
-(2) Department of Architecture, College of Architecture, Art, and Planning, Cornell University, Ithaca, NY 14853, USA [Realtime Urbanism Lab](https://labs.aap.cornell.edu/realtime-urbanism)
+(2) [Realtime Urbanism Lab](https://labs.aap.cornell.edu/realtime-urbanism): Department of Architecture, College of Architecture, Art, and Planning, Cornell University, Ithaca, NY 14853, USA
 
 
 
