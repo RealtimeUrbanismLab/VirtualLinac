@@ -2,7 +2,7 @@
 
 ## Authors
 
-Parminder S.Basran(1), SungHo Synn(2), Gregory A.Marzano(1), Hyun Maenga(1), Farzin Lotfi-Jam(2)
+Parminder S. Basran(1), SungHo Synn(2), Gregory A.Marzano(1), Hyun Maenga(1), Farzin Lotfi-Jam(2)
 
 (1) Department of Clinical Sciences, College of Veterinary Medicine, Cornell University, Ithaca, NY 14853, USA
 (2) Department of Architecture, College of Architecture, Art, and Planning, Cornell University, Ithaca, NY 14853, USA
@@ -17,13 +17,12 @@ Conclusions: The augmented reality linear accelerators and 3D-printed objects ma
 Education, Radiation oncology, Virtual reality, Augmented reality, 3D printing
 
 ## Access Online Application
-
 Visit this linke with desktop, table, or smartphone: [Virtual Linac Online App](https://realtimeurbanismlab.github.io/VirtualLinac)
 
+
+
 # Setup and Guidelines
-
 ## Serve Files Locally Over HTTPS
-
 This guide explains how to serve HTML files locally over HTTPS using `http-server` and self-signed certificates. This setup allows you to test AR features on mobile devices that require HTTPS.
 
 ## Prerequisites
