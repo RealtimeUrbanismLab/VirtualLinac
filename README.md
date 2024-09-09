@@ -2,10 +2,10 @@
 
 ## Authors
 
-Parminder S.Basranaa1, SungHo Synn2, Gregory A.Marzano1, Hyun Maenga1, Farzin Lotfi-Jam2
+Parminder S.Basran(1), SungHo Synn(2), Gregory A.Marzano(1), Hyun Maenga(1), Farzin Lotfi-Jam(2)
 
-1 Department of Clinical Sciences, College of Veterinary Medicine, Cornell University, Ithaca, NY 14853, USA
-2 Department of Architecture, College of Architecture, Art, and Planning, Cornell University, Ithaca, NY 14853, USA
+(1) Department of Clinical Sciences, College of Veterinary Medicine, Cornell University, Ithaca, NY 14853, USA
+(2) Department of Architecture, College of Architecture, Art, and Planning, Cornell University, Ithaca, NY 14853, USA
 
 # Abstract
 Purpose: To create an open-access Linear Accelerator Education and Augmented Reality Navigator (Open LEARN) via 3D printable objects and interactive augmented reality assets.
