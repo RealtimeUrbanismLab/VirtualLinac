@@ -16,6 +16,10 @@ Conclusions: The augmented reality linear accelerators and 3D-printed objects ma
 # Keywords
 Education, Radiation oncology, Virtual reality, Augmented reality, 3D printing
 
+# Access Online Application
+
+Visit this linke with desktop, table, or smartphone: (https://realtimeurbanismlab.github.io/VirtualLinac)
+
 # Serve Files Locally Over HTTPS
 
 This guide explains how to serve HTML files locally over HTTPS using `http-server` and self-signed certificates. This setup allows you to test AR features on mobile devices that require HTTPS.
