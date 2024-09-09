@@ -18,7 +18,7 @@ Education, Radiation oncology, Virtual reality, Augmented reality, 3D printing
 
 # Access Online Application
 
-Visit this linke with desktop, table, or smartphone: (https://realtimeurbanismlab.github.io/VirtualLinac)
+Visit this linke with desktop, table, or smartphone: [Virtual Linac Online App](https://realtimeurbanismlab.github.io/VirtualLinac)
 
 # Serve Files Locally Over HTTPS
 
