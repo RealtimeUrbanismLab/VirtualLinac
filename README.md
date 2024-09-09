@@ -3,6 +3,7 @@
 ## Authors
 
 Parminder S.Basranaa1, SungHo Synn2, Gregory A.Marzano1, Hyun Maenga1, Farzin Lotfi-Jam2
+
 1 Department of Clinical Sciences, College of Veterinary Medicine, Cornell University, Ithaca, NY 14853, USA
 2 Department of Architecture, College of Architecture, Art, and Planning, Cornell University, Ithaca, NY 14853, USA
 
