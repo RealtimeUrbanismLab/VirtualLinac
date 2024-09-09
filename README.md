@@ -1,6 +1,19 @@
-# VirtualLinac
+# Open LEARN: Open access linear accelerator education and augmented reality Navigator
 
+## Authors
 
+Parminder S.Basranaa1, SungHo Synn2, Gregory A.Marzano1, Hyun Maenga1, Farzin Lotfi-Jam2
+1 Department of Clinical Sciences, College of Veterinary Medicine, Cornell University, Ithaca, NY 14853, USA
+2 Department of Architecture, College of Architecture, Art, and Planning, Cornell University, Ithaca, NY 14853, USA
+
+# Abstract
+Purpose: To create an open-access Linear Accelerator Education and Augmented Reality Navigator (Open LEARN) via 3D printable objects and interactive augmented reality assets.
+Methods: This study describes an augmented reality linear accelerator (linac) model accessible through a QR code and a smartphone to address the challenges of medical physics and radiation oncology trainees in low-to-middle-income countries.
+Results: Major components of a generic linear accelerator are modeled as individual objects. These objects can be 3D printed for hands-on learning and used as interactive 3D assets within the augmented reality app. In the AR app, descriptions are displayed to navigate the components spatially and textually. Items modeled include the treatment couch, klystron, circulator, RF waveguides, electron gun, waveguide, beam steering assemblies, target, collimators, multi-leaf collimators, and imaging systems. The linear accelerator is rendered at 50% of its actual size, allowing users to change magnification and view objects from different angles.
+Conclusions: The augmented reality linear accelerators and 3D-printed objects make these complex machines easily accessible with smartphones and 3D-printing technologies, facilitating education and training through physical and virtual interaction.
+
+# Keywords
+Education, Radiation oncology, Virtual reality, Augmented reality, 3D printing
 
 # Serve Files Locally Over HTTPS
 
