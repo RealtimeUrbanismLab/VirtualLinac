@@ -24,7 +24,8 @@ Visit this linke with desktop, table, or smartphone: [Virtual Linac Online App](
 
 This guide explains how to serve HTML files locally over HTTPS using `http-server` and self-signed certificates. This setup allows you to test AR features on mobile devices that require HTTPS.
 
-## Prerequisites
+## Setup and Guidelines
+# Prerequisites
 
 1. **Node.js**: Make sure Node.js is installed. [Download Node.js](https://nodejs.org/).
 2. **Git Bash** (if you're using Windows).
